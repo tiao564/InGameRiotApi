@@ -13,7 +13,7 @@ API = "c916f23e-10bb-4371-bb5b-d5525baa733f"
 #   Program started by Dylan Guldy                              #
 #   Contributors:                                               #
 #       Jon Simmons                                             #
-#       Avaham Blaut                                            #
+#       Avraham Blaut                                           #
 #                                                               #
 #   Started December 7th 2015                                   #
 #                                                               #
@@ -41,10 +41,10 @@ def getChampIdFromName(champName):
 #################################
 def getChampNameFromId(Identity):
 #   name = (str)(raw_input("Champ Name: "))
-    URL = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/"+str(Identity)+ "?champData=info&api_key=" + API
-    response = requests.get(URL)
-    champValue = response.json()
-    return champValue['name']
+   URL = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/"+str(Identity)+ "?champData=info&api_key=" + API
+   response = requests.get(URL)
+   champValue = response.json()
+   return champValue['name']
           
 
 #################################
@@ -78,9 +78,12 @@ def requestRankedData(region, ID):
                           
 
 def main():
-    print getChampNameFromId()
-    things = "Thresh"
-    getChampIdFromName(things)
+   inputChampName = (str)(raw_input("Enter name of champ: "))
+   functionChampId = getChampIdFromName(inputChampName)
+   print functionChampId
+   functionChampName = getChampNameFromId(functionChampId)
+   print functionChampName
+          
 
 if __name__ == "__main__":
     main()
