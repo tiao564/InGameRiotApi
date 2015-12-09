@@ -75,15 +75,30 @@ def requestRankedData(region, ID):
 #   print "\n"
     response = requests.get(URL)
     return response.json()
-                          
+                             
 
 def main():
-   inputChampName = (str)(raw_input("Enter name of champ: "))
-   functionChampId = getChampIdFromName(inputChampName)
-   print functionChampId
-   functionChampName = getChampNameFromId(functionChampId)
-   print functionChampName
-          
+    inputChampName = (str)(raw_input("Enter name of champ: "))
+    functionChampId = getChampIdFromName(inputChampName)
+    print functionChampId
+    functionChampName = getChampNameFromId(functionChampId)
+    print functionChampName
+
+    
+
+    sum_region = (str)(raw_input("Enter reagion, either NA or EU: "))       
+    sum_region = sum_region.lower()
+    sum_name = (str)(raw_input("Summoner name: "))
+    sumJSON = requestSummonerData(sum_region, sum_name)
+
+    sum_id = sumJSON[sum_name]['id']
+    sum_id = str(sum_id)
+
+    sum_infoJSON = requestRankedData(sum_region, sum_id)
+    print sum_infoJSON[sum_id][0]['tier']
+    print sum_infoJSON[sum_id][0]['entries'][0]['division']
+    print sum_infoJSON[sum_id][0]['entries'][0]['leaguePoints']
+    
 
 if __name__ == "__main__":
     main()
