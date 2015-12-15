@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import requests
 API = "c916f23e-10bb-4371-bb5b-d5525baa733f"
 
@@ -79,20 +80,29 @@ def requestRankedData(region, ID):
 
 def main():
     inputChampName = (str)(raw_input("Enter name of champ: "))
+    inputChampName = inputChampName.title() 
     functionChampId = getChampIdFromName(inputChampName)
     print functionChampId
     functionChampName = getChampNameFromId(functionChampId)
     print functionChampName
 
-    
-
     sum_region = (str)(raw_input("Enter reagion, either NA or EU: "))       
     sum_region = sum_region.lower()
     sum_name = (str)(raw_input("Summoner name: "))
+    sum_name = sum_name.replace(" ","")
+    print sum_name
     sumJSON = requestSummonerData(sum_region, sum_name)
 
     sum_id = sumJSON[sum_name]['id']
     sum_id = str(sum_id)
+    print sum_id
+
+
+    #sum_id = sum_id.insert(0,"'")
+    #sum_id = sum_id.append("'")
+
+
+
 
     sum_infoJSON = requestRankedData(sum_region, sum_id)
     print sum_infoJSON[sum_id][0]['tier']
